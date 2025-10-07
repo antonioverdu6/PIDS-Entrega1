@@ -1,0 +1,21 @@
+cat > .gitignore << 'EOF'
+# --- Archivos y carpetas a ignorar ---
+
+# Datos locales de Mongo
+mongo_data/
+
+# Cachés y modelos de Rasa
+rasa/.rasa/
+rasa/models/
+rasa/results/
+__pycache__/
+
+# Archivos temporales
+*.log
+*.tar.gz
+*.tmp
+*.swp
+
+# Datos grandes o de prueba
+data/
+EOF

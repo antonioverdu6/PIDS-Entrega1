@@ -1,0 +1,28 @@
+# Dockerfile-rasa
+FROM python:3.10-slim
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential git curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Rasa + SDK (3.5.x) y pins COMPATIBLES con Sanic/websockets
+RUN pip install --no-cache-dir \
+      rasa==3.5.2 \
+      rasa-sdk==3.5.0 && \
+    pip install --no-cache-dir \
+      sanic==21.12.2 \
+      sanic-routing==0.7.2 \
+      websockets==10.4 \
+      "httptools<0.6" \
+      "uvloop<0.18" \
+      "aiohttp<4" \
+      "urllib3<2"
+
+WORKDIR /app
+COPY rasa/ /app/
+
+CMD ["rasa", "run", "--enable-api", "--cors", "*", "--debug", "-m", "models"]

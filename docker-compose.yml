@@ -1,0 +1,139 @@
+services:
+  mongo:
+    image: mongo:6
+    container_name: taxi-mongo
+    ports: ["27017:27017"]
+    volumes:
+      - ./mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
+    networks: [taxi-net]
+
+  spark:
+    build:
+      context: .
+      dockerfile: Dockerfile.spark
+    container_name: taxi-spark
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redpanda:
+        condition: service_started
+    networks: [taxi-net]
+    volumes:
+      - ./src:/app/src
+      - ./data:/app/data
+      - ./jars:/opt/spark/jars
+    environment:
+      - BOOTSTRAP_SERVERS=redpanda:9092
+      - TOPIC=taxi_trips
+      - MONGO_URI=mongodb://taxi-mongo:27017
+      - MONGO_DB=taxi_db
+    command: >
+      sh -lc "
+        echo 'Guardando datos iniciales en Mongo...' &&
+        python3 /app/src/batch/save_to_mongo.py &&
+        echo 'Iniciando streaming hacia Mongo...' &&
+        python3 /app/src/stream/stream_to_mongo.py
+      "
+
+
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.flask
+    container_name: taxi-api
+    depends_on: [mongo]
+    environment:
+      - MONGO_URI=mongodb://taxi-mongo:27017/taxi_db
+    ports:
+      - "8000:8000"
+    networks: [taxi-net]
+
+  redpanda:
+    image: redpandadata/redpanda:latest
+    container_name: taxi-redpanda
+    command:
+      - redpanda start
+      - --overprovisioned
+      - --smp=1
+      - --memory=512M
+      - --reserve-memory=0M
+      - --node-id=0
+      - --kafka-addr=PLAINTEXT://0.0.0.0:9092
+      - --advertise-kafka-addr=PLAINTEXT://redpanda:9092
+    ports:
+      - "9092:9092"
+      - "9644:9644"
+    networks: [taxi-net]
+
+  producer:
+    image: python:3.11-slim
+    container_name: taxi-producer
+    working_dir: /app
+    volumes:
+      - ./src/producer:/app
+      - ./data:/app/data
+    environment:
+      - BOOTSTRAP_SERVERS=redpanda:9092
+      - TOPIC=taxi_trips
+      - CSV_PATH=/app/data/prueba.csv
+      - MIN_INTERVAL=0.5
+      - MAX_INTERVAL=3.0
+      - MIN_BATCH=1
+      - MAX_BATCH=10
+      - SHUFFLE=false
+    command: >
+      sh -lc "pip install --no-cache-dir -r requirements.txt &&
+              python producer.py"
+    depends_on:
+      - redpanda
+    networks: [taxi-net]
+
+
+  rasa:
+    build:
+      context: .
+      dockerfile: Dockerfile.rasa
+    container_name: taxi-rasa
+    ports:
+      - "5005:5005"
+    volumes:
+      - ./rasa:/app
+    networks: [taxi-net]
+
+  rasa-actions:
+    build:
+      context: .
+      dockerfile: Dockerfile.rasa-actions
+    container_name: taxi-actions
+    volumes:
+      - ./rasa/actions:/app/actions
+    depends_on:
+      - mongo
+    networks:
+      - taxi-net
+
+
+
+
+  webchat:
+    build:
+      context: .
+      dockerfile: Dockerfile-webchat
+    platform: linux/amd64
+    container_name: taxi-webchat
+    ports:
+      - "8080:80"
+    depends_on: [rasa]
+    networks: [taxi-net]
+
+
+
+
+networks:
+  taxi-net:
+    driver: bridge
+
+

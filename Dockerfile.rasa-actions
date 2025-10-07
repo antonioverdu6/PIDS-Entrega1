@@ -1,0 +1,6 @@
+FROM rasa/rasa-sdk:3.7.0
+USER root
+COPY ./rasa/actions/requirements.txt /app/actions/requirements.txt
+RUN pip install --no-cache-dir -r /app/actions/requirements.txt
+USER 1001
+CMD ["start", "--actions", "actions"]

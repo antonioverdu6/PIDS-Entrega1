@@ -1,0 +1,24 @@
+FROM python:3.11-slim
+
+# 1) Java 21 + procps (para que 'ps' exista) + CA certs
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      openjdk-21-jre-headless procps ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
+
+# 2) Exporta JAVA_HOME de forma portable (sirve para 21 o lo que sea que instales)
+RUN JAVA_BIN="$(readlink -f "$(which java)")" && \
+    ln -s "$(dirname "$(dirname "$JAVA_BIN")")" /opt/java
+ENV JAVA_HOME=/opt/java
+ENV PATH="$JAVA_HOME/bin:$PATH"
+
+# 3) Dependencias Python
+RUN pip install --no-cache-dir pyspark==3.5.1 pymongo kafka-python
+
+# 4) Tu código
+WORKDIR /app
+COPY src /app/src
+COPY data /app/data
+# COPY jars /opt/spark/jars  # solo si los necesitas realmente
+
+# 5) Ejecuta el streaming
+CMD ["python3", "/app/src/stream/stream_to_mongo.py"]

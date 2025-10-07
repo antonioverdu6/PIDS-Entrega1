@@ -1,0 +1,46 @@
+ version: "3.1"
+
+ intents:
+   - greet
+   - goodbye
+   - affirm
+   - deny
+   - mood_great
+   - mood_unhappy
+   - bot_challenge
+   - nlu_fallback  
+   - average_trip_distance
+   - most_frequent_hour
+
+ responses:
+   utter_greet:
+   - text: "¡Hola! ¿En qué puedo ayudarte?"
+
+   utter_cheer_up:
+   - text: "¡Anímate hombre!"
+
+   utter_did_that_help:
+   - text: "¿Te ha servido?"
+
+   utter_happy:
+   - text: "¡Genial, seguimos!"
+
+   utter_goodbye:
+   - text: "¡Hasta luego!"
+
+   utter_iamabot:
+   - text: "Soy un bot impulsado por Rasa."
+
+   utter_please_rephrase:
+   - text: "No estoy seguro de haber entendido. ¿Puedes reformular?"
+ 
+ session_config:
+   session_expiration_time: 60
+   carry_over_slots_to_new_session: true
+
+ 
+ actions:
+   - action_hello_world
+   - action_average_trip_distance
+   - action_most_frequent_hour
+   - action_mostrar_ultimo_viaje

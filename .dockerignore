@@ -1,0 +1,12 @@
+# No metas datos de Mongo en la imagen (rompe permisos y ensancha el contexto)
+mongo_data
+__MACOSX
+
+# Cosas que no necesitas para construir imágenes
+notebooks
+*.ipynb
+*.wt
+*.lock
+diagnostic.data
+WiredTiger*
+journal
