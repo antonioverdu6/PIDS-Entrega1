@@ -1,0 +1,59 @@
+version: "3.1"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+    - intent: goodbye
+    - action: utter_goodbye
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+    - intent: bot_challenge
+    - action: utter_iamabot
+
+- rule: Greet
+  steps:
+    - intent: greet
+    - action: utter_greet
+
+- rule: Fallback
+  steps:
+    - intent: nlu_fallback
+    - action: utter_please_rephrase
+
+- rule: Tell the average trip distance
+  steps:
+    - intent: average_trip_distance
+    - action: action_average_trip_distance
+
+- rule: Tell the most frequent pickup hour
+  steps:
+    - intent: most_frequent_hour
+    - action: action_most_frequent_hour
+
+- rule: Show the last trip
+  steps:
+    - intent: show_last_trip
+    - action: action_show_last_trip
+
+- rule: Tell the average trip duration
+  steps:
+    - intent: average_trip_duration
+    - action: action_average_trip_duration
+
+- rule: Tell the average tip amount
+  steps:
+    - intent: average_tip_amount
+    - action: action_average_tip_amount
+
+- rule: Tell the total revenue collected
+  steps:
+    - intent: total_revenue
+    - action: action_total_revenue
+
+- rule: Tell the total number of trips
+  steps:
+    - intent: total_number_of_trips
+    - action: action_total_number_of_trips
+

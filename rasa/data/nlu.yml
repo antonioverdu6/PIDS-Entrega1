@@ -1,0 +1,163 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+
+- intent: mood_great
+  examples: |
+    - perfect
+    - great
+    - amazing
+    - feeling like a king
+    - wonderful
+    - I am feeling very good
+    - I am great
+    - I am amazing
+    - I am going to save the world
+    - super stoked
+    - extremely good
+    - so so perfect
+    - so good
+    - so perfect
+
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremly sad
+    - so saad
+    - so sad
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+
+- intent: average_trip_distance
+  examples: |
+    - What is the average trip distance?
+    - Tell me the average distance of the trips
+    - How far do trips usually go?
+    - What's the mean trip distance?
+    - Give me the typical trip distance
+    - Can you tell me the average travel distance?
+    - I'd like to know how long trips are on average
+    - What's the average length of a taxi trip?
+    - What is the mean distance for trips?
+    - How long are taxi rides on average?
+
+- intent: most_frequent_hour
+  examples: |
+    - What is the most frequent hour for taxi trips?
+    - What is the busiest hour of the day?
+    - When do most trips happen?
+    - At what time are most rides taken?
+    - What time of day are taxis most active?
+    - Tell me the most common pickup hour
+    - What is the hour with the most trips?
+
+- intent: show_last_trip
+  examples: |
+    - show me the last recorded trip
+    - what was the last trip
+    - tell me about the most recent trip
+
+
+- intent: average_trip_duration
+  examples: |
+    - What is the average trip duration?
+    - How long do trips take on average?
+    - Tell me the mean duration of a trip
+    - What's the average travel time?
+    - How much time do taxi rides usually take?
+    - On average, how long is a taxi trip?
+    - Give me the typical duration of a taxi ride
+    - What is the mean time between pickup and dropoff?
+
+- intent: average_tip_amount
+  examples: |
+    - What is the average tip amount?
+    - How much do people tip on average?
+    - Tell me the mean tip value
+    - What's the typical tip?
+    - How big are taxi tips usually?
+    - What is the average amount of tips?
+    - Give me the average tip
+
+- intent: total_revenue
+  examples: |
+    - What is the total revenue collected?
+    - How much money have the taxis made?
+    - Tell me the total income from all trips
+    - How much revenue has been generated?
+    - What is the total amount of money earned?
+    - Show me the total collected fares
+    - How much has been collected in total?
+
+
+- intent: total_number_of_trips
+  examples: |
+    - How many trips are recorded?
+    - What is the total number of trips?
+    - Tell me how many taxi rides there are
+    - How many rides have been made?
+    - How many trips exist in the database?
+    - Give me the total count of trips
+    - What's the number of taxi trips recorded?
