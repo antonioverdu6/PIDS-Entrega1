@@ -10,3 +10,4 @@ notebooks
 diagnostic.data
 WiredTiger*
 journal
+rasa/.rasa/cache
