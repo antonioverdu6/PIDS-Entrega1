@@ -38,20 +38,6 @@ services:
         python3 /app/src/stream/stream_to_mongo.py
       "
 
-
-
-  api:
-    build:
-      context: .
-      dockerfile: Dockerfile.flask
-    container_name: taxi-api
-    depends_on: [mongo]
-    environment:
-      - MONGO_URI=mongodb://taxi-mongo:27017/taxi_db
-    ports:
-      - "8000:8000"
-    networks: [taxi-net]
-
   redpanda:
     image: redpandadata/redpanda:latest
     container_name: taxi-redpanda
