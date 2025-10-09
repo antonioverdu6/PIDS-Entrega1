@@ -1,11 +1,11 @@
-# 🖐️ EdgePoseBot
+# PIDS-Proyecto1
 
 **Proyecto PIDS 25/26 – Proyectos de Ingeniería de Sistemas de Datos (UPM)**  
 Sistema que combina **reconocimiento de gestos con MediaPipe y CNN en Raspberry Pi**, **procesamiento y almacenamiento de datos** con **MongoDB/Spark**, y un **chatbot Rasa** para interactuar con la información procesada.
 
 ---
 
-## 📘 Descripción general
+## Descripción general
 
 EdgePoseBot integra tres componentes principales dentro de un flujo completo de ingeniería de datos:
 
@@ -23,11 +23,7 @@ EdgePoseBot integra tres componentes principales dentro de un flujo completo de 
    - Chatbot implementado con **Rasa**, conectado a la infraestructura.  
    - Permite consultar información y ejecutar acciones mediante lenguaje natural.
 
----
-
-## 🧩 Arquitectura general
-
-## ⚙️ Tecnologías utilizadas
+## Tecnologías utilizadas
 
 | Componente | Tecnología |
 |-------------|-------------|
@@ -41,7 +37,7 @@ EdgePoseBot integra tres componentes principales dentro de un flujo completo de 
 
 ---
 
-## 🚀 Instalación y ejecución
+## Instalación y ejecución
 
 1. **Clonar el repositorio**
    ```bash
