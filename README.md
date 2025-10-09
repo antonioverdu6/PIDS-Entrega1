@@ -41,5 +41,5 @@ EdgePoseBot integra tres componentes principales dentro de un flujo completo de 
 
 1. **Clonar el repositorio**
    ```bash
-   git clone https://github.com/<usuario>/<repositorio>.git
+   git clone https://github.com/<usuario>/PIDS-Proyecto1.git
    cd <repositorio>
