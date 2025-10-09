@@ -42,3 +42,10 @@ EdgePoseBot integra tres componentes principales dentro de un flujo completo de 
    ```bash
    docker compose up --build
    ```
+2. **Entrar al Chatbot de Rasa**
+   ```motor de búsqueda
+   localhost:8080
+   ```
+
+
+
